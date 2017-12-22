@@ -6,7 +6,8 @@ from django.db import connection
 
 # Create your views here.
 def index(request):
-    return render(request,'index.html') 
+	request.session['username'] = ''
+	return render(request,'index.html')
 
 def login(request):
 	return render(request,'login.html')
