@@ -76,3 +76,26 @@ def signUp(request):
 def sendPackage(request):
 	return render(request,'send_package.html')
 
+def getProvince(request):
+	cursor = connection.cursor()
+	cursor.execute("select distinct addr_pro from Log_web_godown")
+	row = cursor.fetchall()
+	res = {}
+	res['province'] = row
+	return HttpResponse(json.dumps(res))
+
+def getCity(request):
+	try:
+		provincename = request.GET['province']
+		printf(provincename)
+	except Exception:
+		return HttpResponse(json.dumps({
+				'statCode' : '--',
+			}))
+	cursor = connection.cursor()
+	cursor.execute("select distinct addr_city from Log_web_godown \
+		where addr_pro = %s",[provincename])
+	row = cursor.fetchall()
+	res = {}
+	res['city'] = row
+	return HttpResponse(json.dumps(res))
