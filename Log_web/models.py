@@ -51,15 +51,17 @@ class User_info(models.Model):
 	addr_block = models.CharField(max_length=100)
 	tel = models.CharField(max_length=20)
 
-'''
+
 #线下实体表
 class Godown(models.Model):
 	godown_id = models.AutoField(primary_key=True)
+	godown_num = models.IntegerField()
 	addr_pro = models.CharField(max_length=20)
 	addr_city = models.CharField(max_length=20,blank=True)
 	addr_district = models.CharField(max_length=20)
 	addr_block = models.CharField(max_length=100)
 
+'''
 #配送员工
 class Distributor(models.Model):
 	distributor_id = models.AutoField(primary_key=True)
