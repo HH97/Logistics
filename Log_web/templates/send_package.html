@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>
 
-<body background="../static/map.jpg" style=" background-repeat:no-repeat ;
-			 background-size:100% 100%; 
-			 background-attachment:fixed;">
+<body background="../static/bg.jpg" style=" background-repeat:no-repeat ;
+background-size:100% 100%; 
+background-attachment:fixed;">
   <nav class="navbar navbar-expand-md bg-primary navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="../main.html"><i class="fa d-inline fa-lg fa-cloud"></i><b> Home</b></a>
+      <a class="navbar-brand" href="/"><i class="fa d-inline fa-lg fa-cloud"></i><b>Home</b></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
         aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-        <ul class="navbar-nav"></ul>
+        <a class="btn navbar-btn ml-2 text-white btn-secondary"><i class="fa d-inline fa-lg fa-user-circle-o"></i> LogOut</a>
       </div>
     </div>
   </nav>
@@ -24,7 +24,7 @@
   <br>
   <br>
   <br>
-  <div class="py-5 bg-primary text-white">
+  <div class="py-5 text-light bg-secondary">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
@@ -34,16 +34,20 @@
               <input type="text" class="form-control" id="SenderName" placeholder="寄件人姓名"> </div>
             <div class="form-group"> <label for="InputEmail1"></label>
               <input type="text" class="form-control" placeholder="寄件人联系方式" id="SenderTele"> </div>
-            <div class="form-group"> <label for="Textarea"></label> <select name="translist">
-  								<option value="volvo">省</option>
-  								<option value="saab"></option>
-									</select> <select name="translist">
-  								<option value="volvo">市</option>
-  								<option value="saab"></option>
-              </select>
-              <input type="text" class="form-control" placeholder="区/县" id="SenderRegion">
-              <input type="text" class="form-control" placeholder="街道" id="SenderStreet"> </div>
-          </form>
+            <div class="btn-group">
+              <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" id="SenderProvince" href="javascript:void(0)">选择省份</a>
+              <div class="dropdown-menu scrollable-menu" id="ProvinceList" role="menu">
+                <!--Added by index.js-->
+              </div>
+            </div>
+            <div class="btn-group">
+              <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" id="SenderCity" href="javascript:void(0)">选择城市</a>
+              <div class="dropdown-menu scrollable-menu" id="CityList" role="menu">
+                <!--Added by index.js-->
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="区/县" id="SenderRegion">
+            <input type="text" class="form-control" placeholder="街道" id="SenderStreet"> </form>
         </div>
         <div class="col-md-6">
           <h1>收件方</h1>
@@ -52,16 +56,20 @@
               <input type="text" class="form-control" id="ReceiverName" placeholder="收件人姓名"> </div>
             <div class="form-group"> <label for="InputEmail1"></label>
               <input type="text" class="form-control" id="ReceiverTele" placeholder="收件人联系方式"> </div>
-            <div class="form-group"> <label for="Textarea"></label> <select name="translist">
-  								<option value="volvo">省</option>
-  								<option value="saab"></option>
-									</select> <select name="translist">
-  								<option value="volvo">市</option>
-  								<option value="saab"></option>
-              </select>
-              <input type="text" class="form-control" placeholder="区/县" id="ReciverRegion">
-              <input type="text" class="form-control" id="ReciverStreet" placeholder="街道"> </div>
-          </form>
+            <div class="btn-group">
+              <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" id="ReceiverProvince" href="javascript:void(0)">选择省份</a>
+              <div class="dropdown-menu scrollable-menu" id="ProvinceList" role="menu">
+                <!--Added by form.js-->
+              </div>
+            </div>
+            <div class="btn-group">
+              <a class="btn btn-lg dropdown-toggle disabled my-1 btn-light" data-toggle="dropdown" href="javascript:void(0)" id="ReceiverCity">选择城市</a>
+              <div class="dropdown-menu scrollable-menu" id="CityList" role="menu">
+                <!--Added by form.js-->
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="区/县" id="ReciverRegion">
+            <input type="text" class="form-control" id="ReciverStreet" placeholder="街道"> </form>
         </div>
       </div>
     </div>
@@ -72,8 +80,7 @@
       <div class="row">
         <div class="col-md-12">
           <form class="form-inline">
-            <div class="form-group">
-              <input type="email" class="form-control" placeholder="运费"> </div> <select name="translist">
+            <div class="form-group"></div> <select name="translist">
   								<option value="volvo">陆运</option>
   								<option value="saab">空运</option>
 									</select>
@@ -99,9 +106,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:110px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">made with&nbsp;&nbsp;
-    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
-  </pingendo>
+  <script src="../static/form.js"></script>
 </body>
 
 </html>
