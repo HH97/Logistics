@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^register/$',views.register),
     url(r'^signIn/$',views.signIn),
     url(r'^signUp/$',views.signUp),
+    url(r'^sendPackage/$',views.sendPackage),
     url(r'^user/$',views.user),
     url(r'^admin/', admin.site.urls),
 ]

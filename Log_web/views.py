@@ -73,5 +73,6 @@ def signUp(request):
 				'successmessage' : 'Rigester Success! Welcome '+username+' !',
 			}))
 
-
+def sendPackage(request):
+	return render(request,'send_package.html')
 
