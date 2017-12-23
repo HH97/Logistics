@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^signIn/$',views.signIn),
     url(r'^signUp/$',views.signUp),
     url(r'^sendPackage/$',views.sendPackage),
+    url(r'^getProvince/$',views.getProvince),
+    url(r'^getCity/$',views.getCity),
     url(r'^user/$',views.user),
     url(r'^admin/', admin.site.urls),
 ]

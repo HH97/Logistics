@@ -96,7 +96,7 @@ class Package_info(models.Model):
 		null = True
 	)
 	loaction = models.CharField(max_length=100)
-	status = models.IntegerField()
+	status = models.CharField(max_length=100)
 
 #线下管理人员表
 class Godown_staff(models.Model):
