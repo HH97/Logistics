@@ -87,10 +87,9 @@ def getProvince(request):
 def getCity(request):
 	try:
 		provincename = request.GET['province']
-		printf(provincename)
 	except Exception:
 		return HttpResponse(json.dumps({
-				'statCode' : '--',
+				'city' : '--',
 			}))
 	cursor = connection.cursor()
 	cursor.execute("select distinct addr_city from Log_web_godown \
@@ -99,3 +98,80 @@ def getCity(request):
 	res = {}
 	res['city'] = row
 	return HttpResponse(json.dumps(res))
+
+def userPackage(request):
+	try:
+		mes = {}
+		mes['sendName'] = request.POST["SenderName"]
+		mes['sendTel'] = request.POST["SenderTele"]
+		mes['sendPro'] = request.POST["SenderProvince"]
+		mes['sendCity'] = request.POST["SenderCity"]
+		mes['sendRegion'] = request.POST["SenderRegion"]
+		mes['sendStreet'] = request.POST["SenderStreet"]
+		mes['recName'] = request.POST["ReceiverName"]
+		mes['recTel'] = request.POST["ReceiverTele"]
+		mes['recPro'] = request.POST["ReceiverProvince"]
+		mes['recCity'] = request.POST["ReceiverCity"]
+		mes['recRegion'] = request.POST["ReceiverRegion"]
+		mes['recStreet'] = request.POST["ReceiverStreet"]
+		mes['transType'] = request.POST["TransType"]
+	except Exception:
+		return HttpResponse(json.dumps({
+				'statCode' : -1,
+				'errormessage' : 'POST Error!',
+			}))
+	try:
+		if request.session['username'] == '':
+			return HttpResponse(json.dumps({
+					'statCode' : -2,
+					'errormessage' : 'Please sign in first!',
+				}))
+		cursor = connection.cursor()
+		cursor.execute('insert into Log_web_package values(0,%s)',
+			[request.session['username']])
+		package_id = cursor.lastrowid
+		cursor.execute('insert into Log_web_package_send\
+			(id,package_id_id,addr_pro,addr_city,addr_district,addr_block,tel)\
+			values(0,%s,%s,%s,%s,%s,%s)',[
+				str(package_id),
+				mes['sendPro'],
+				mes['sendCity'],
+				mes['sendRegion'],
+				mes['sendStreet'],
+				mes['sendTel']
+			])
+		cursor.execute('insert into Log_web_package_receive\
+			(id,package_id_id,addr_pro,addr_city,addr_district,addr_block,tel)\
+	 		values(0,%s,%s,%s,%s,%s,%s)',[
+				str(package_id),
+				mes['recPro'],
+				mes['recCity'],
+				mes['recRegion'],
+				mes['recStreet'],
+				mes['recTel']
+			])
+		#获取仓库所在地
+		cursor.execute('select godown_id from Log_web_godown \
+			where addr_pro=%s && addr_city=%s order by rand()',
+			[mes['sendPro'],mes['sendCity']])
+		row = cursor.fetchall()
+		godown_id = row[0][0]
+		#将信息填入包裹信息表
+		cursor.execute('insert into Log_web_package_info \
+			values(0,0.0,%s,%s,null,%s,%s)',[
+				mes['transType'],
+				'等待揽收',
+				str(package_id),
+				str(godown_id)
+			])
+		return HttpResponse(json.dumps({
+				'statCode' : 0,
+				'successmessage' : '您的包裹ID为'+str(package_id)+",正在等待揽收",
+			}))
+	except Exception:
+		return HttpResponse(json.dumps({
+				'statCode' : -2,
+				'errormessage' : 'Backend processing Error!',
+			}))
+
+

@@ -30,7 +30,7 @@ class Package_send(models.Model):
 	tel = models.CharField(max_length=20)
 
 #包裹收件表
-class Package_recieve(models.Model):
+class Package_receive(models.Model):
 	package_id = models.OneToOneField(
 		Package,
 		on_delete=models.CASCADE,
@@ -61,7 +61,6 @@ class Godown(models.Model):
 	addr_district = models.CharField(max_length=20)
 	addr_block = models.CharField(max_length=100)
 
-'''
 #配送员工
 class Distributor(models.Model):
 	distributor_id = models.AutoField(primary_key=True)
@@ -70,6 +69,26 @@ class Distributor(models.Model):
 		on_delete = models.SET_NULL,
 		null = True
 	)
+
+#包裹信息
+class Package_info(models.Model):
+	package_id = models.OneToOneField(
+		Package,
+		on_delete = models.CASCADE,
+	)
+	weight = models.FloatField()
+	transport_form = models.CharField(max_length=10)
+	Distributor_id = models.ForeignKey(
+		Distributor,
+		on_delete = models.SET_NULL,
+		null = True
+	)
+	godown_id = models.ForeignKey(
+		Godown,
+		on_delete = models.SET_NULL,
+		null = True
+	)
+	status = models.CharField(max_length=100)
 
 #包裹配送信息
 class Distributor_package(models.Model):
@@ -82,28 +101,12 @@ class Distributor_package(models.Model):
 		on_delete = models.CASCADE,
 	)
 
-#包裹信息
-class Package_info(models.Model):
-	package_id = models.OnetoOneField(
-		Package,
-		on_delete = models.CASCADE,
-	)
-	weight = models.FloatField()
-	transport_form = models.IntegerField()
-	Distributor_id = models.ForeignKey(
-		Distributor,
-		on_delete = models.SET_NULL,
-		null = True
-	)
-	loaction = models.CharField(max_length=100)
-	status = models.CharField(max_length=100)
-
 #线下管理人员表
 class Godown_staff(models.Model):
 	staff_id = models.AutoField(primary_key = True)
 	godown_id = models.ForeignKey(
 		Godown,
-		on_delete = SET_NULL,
+		on_delete = models.SET_NULL,
 		null = True,
 	)
 
@@ -111,6 +114,5 @@ class Godown_staff(models.Model):
 class Company(models.Model):
 	name = models.CharField(max_length=50)
 	sum_money = models.IntegerField()
-'''
 
 
