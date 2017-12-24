@@ -12,7 +12,7 @@ background-size:100% 100%;
 background-attachment:fixed;">
   <nav class="navbar navbar-expand-md bg-primary navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="/"><i class="fa d-inline fa-lg fa-cloud"></i><b>Home</b></a>
+      <a class="navbar-brand" href="index.html"><i class="fa d-inline fa-lg fa-cloud"></i><b>Home</b></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
         aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
@@ -30,25 +30,18 @@ background-attachment:fixed;">
     </div>
   </div>
   <div class="py-5 text-white opaque-overlay">
-    <div class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <ul class="nav nav-pills flex-column">
-              <li class="nav-item">
-                <a class="active nav-link" href="login.html"><i class="fa fa-home fa-home"></i>&nbsp;返回登录界面</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="user_info.html">用户信息</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="/sendPackage/">邮寄包裹</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link text-secondary">待收包裹</a>
-              </li>
-            </ul>
-          </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>待收包裹</h1>
+          <br>
+          <form class="form-inline justify-content-center">
+            <div class="input-group my-1"> {%for x in id_sum%} {% block mainbody %}
+              <input type="text" class="form-control mr-3 my-1" placeholder="包裹ID" id="inlineFormInputGroup">
+              <input type="text" class="form-control mr-3 my-1" placeholder="包裹位置" id="inlineFormInputGroup">
+              <input type="text" class="form-control mr-3 my-1" placeholder="包裹状态" id="inlineFormInputGroup">
+              <input type="text" class="form-control mr-3 my-1" placeholder="配送人ID" id="inlineFormInputGroup"> {% endblock %} {%endfor%} </div>
+          </form>
         </div>
       </div>
     </div>
