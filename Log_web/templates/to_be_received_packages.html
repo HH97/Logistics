@@ -36,12 +36,16 @@ background-attachment:fixed;">
           <h1>待收包裹</h1>
           <br>
           <form class="form-inline justify-content-center">
-            <div class="input-group my-1"> {%for x in id_sum%} {% block mainbody %}
+            <div class="input-group my-1">
               <input type="text" class="form-control mr-3 my-1" placeholder="包裹ID" id="inlineFormInputGroup">
               <input type="text" class="form-control mr-3 my-1" placeholder="包裹位置" id="inlineFormInputGroup">
               <input type="text" class="form-control mr-3 my-1" placeholder="包裹状态" id="inlineFormInputGroup">
-              <input type="text" class="form-control mr-3 my-1" placeholder="配送人ID" id="inlineFormInputGroup"> 
-            {% endblock %} {%endfor%} </div>
+              <input type="text" class="form-control mr-3 my-1" placeholder="配送人ID" id="inlineFormInputGroup"> </div>
+            <div class="input-group my-1"> {% for package_id in package_id_list %}
+              <p>{{包裹id}}</p> {% endfor %} {% for package_addr in package_addr_list %}
+              <p>{{包裹位置}}</p> {% endfor%} {% for package_status in package_status_list %}
+              <p>{{包裹状态}}</p> {% endfor %} {% for courier_id in courier_id_lis %}
+              <p>{{配送员id}}</p> {% endbfor %} </div>
           </form>
           <a class="btn btn-primary" href="/user">返回</a>
         </div>
