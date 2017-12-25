@@ -36,15 +36,13 @@ background-attachment:fixed;">
         <div class="col-md-6">
           <h1 class="text-gray-dark">用户信息</h1>
           <br>
-          <form class="" method="post" action="https://formspree.io/">
-            <div class="form-group"> <label>用户姓名</label> {% block mainbody0 %}
-              <p>{{name}}</p> {% endblock %}</div>
-            <div class="form-group"> <label>联系方式</label> {% block mainbody1 %}
-              <p>{{tel}}</p> {% endblock %}</div>
-            <div class="form-group"> <label>常用地址</label> {% block mainbody2 %}
-              <p>{{address}}</p> {% endblock %}</div>
-            <a class="btn btn-primary" href="user.html">返回</a>
-          </form>
+          <div class="form-group"> <label>用户姓名</label> {% block mainbody0 %}
+            <p>{{name}}</p> {% endblock %}</div>
+          <div class="form-group"> <label>联系方式</label> {% block mainbody1 %}
+            <p>{{tel}}</p> {% endblock %}</div>
+          <div class="form-group"> <label>常用地址</label> {% block mainbody2 %}
+            <p>{{address}}</p> {% endblock %}</div>
+          <a class="btn btn-primary" href="/user">返回</a>
         </div>
       </div>
     </div>
