@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^userPackage/$',views.userPackage),
     url(r'^userInfo/$',views.userInfo),
     url(r'^user/$',views.user),
+    url(r'^logout/$',views.logout),
     url(r'^admin/', admin.site.urls),
 ]

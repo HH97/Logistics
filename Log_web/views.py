@@ -203,3 +203,6 @@ def userInfo(request):
 			'address':address
 			}) 
 
+def logout(request):
+	request.session['username'] = ''
+	return render(request,'index.html')
