@@ -68,7 +68,6 @@ def signUp(request):
 			}))
 	else:
 		cursor.execute("insert into Log_web_login_user values(%s,%s,1)",[username,password])
-		cursor.execute("insert into Log_web_user_info values(%s,0,0,0,0,0)",[username])
 		return HttpResponse(json.dumps({
 				'statCode' : 0,
 				'successmessage' : 'Rigester Success! Welcome '+username+' !',
@@ -165,17 +164,6 @@ def userPackage(request):
 				str(package_id),
 				str(godown_id)
 			])
-		#更新用户信息表
-		cursor.execute('update Log_web_user_info set tel=%s , addr_pro=%s , \
-			addr_city=%s , addr_district=%s , addr_block=%s \
-			where user_name = %s',[
-				mes['sendTel'],
-				mes['sendPro'],
-				mes['sendCity'],
-				mes['sendRegion'],
-				mes['sendStreet'],
-				request.session['username']
-			])
 		return HttpResponse(json.dumps({
 				'statCode' : 0,
 				'successmessage' : '您的包裹ID为'+str(package_id)+",正在等待揽收",
@@ -186,20 +174,4 @@ def userPackage(request):
 				'errormessage' : 'Backend processing Error!',
 			}))
 
-def userInfo(request):
-	if request.session['username'] == '':
-		return render(request,"user_info.html",
-			{'name':'--','tel':'--','address':'--'})
-	else:
-		cursor = connection.cursor()
-		cursor.execute('select * from Log_web_user_info where user_name = %s'
-			,[request.session['username']])
-		row = cursor.fetchall()
-		tel = row[0][5]
-		address = row[0][1] + row[0][2] + row[0][3] + row[0][4]
-		return render(request,"user_info.html",{
-			'name':request.session['username'],
-			'tel':tel,
-			'address':address
-			}) 
 

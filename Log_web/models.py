@@ -43,12 +43,13 @@ class Package_receive(models.Model):
 
 #用户常用信息表
 class User_info(models.Model):
-	user_name = models.CharField(max_length=20,primary_key=True)
-	addr_pro = models.CharField(max_length=20,blank=True)
+	user_id = models.AutoField(primary_key=True)
+	username = models.CharField(max_length=20)
+	addr_pro = models.CharField(max_length=20)
 	addr_city = models.CharField(max_length=20,blank=True)
-	addr_district = models.CharField(max_length=20,blank=True)
-	addr_block = models.CharField(max_length=100,blank=True)
-	tel = models.CharField(max_length=20,blank=True)
+	addr_district = models.CharField(max_length=20)
+	addr_block = models.CharField(max_length=100)
+	tel = models.CharField(max_length=20)
 
 
 #线下实体表
