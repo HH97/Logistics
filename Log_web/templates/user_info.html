@@ -12,7 +12,7 @@ background-size:100% 100%;
 background-attachment:fixed;">
   <nav class="navbar navbar-expand-md bg-primary navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="/user"><i class="fa d-inline fa-lg fa-cloud"></i><b>Home</b></a>
+      <a class="navbar-brand" href="user.html"><i class="fa d-inline fa-lg fa-cloud"></i><b>Home</b></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
         aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
@@ -36,13 +36,15 @@ background-attachment:fixed;">
         <div class="col-md-6 opaque-overlay">
           <h1 class="text-gray-dark text-secondary">用户信息</h1>
           <br>
-          <div class="form-group"> <label>用户姓名</label> {% block mainbody0 %}
-            <p>{{name}}</p> {% endblock %}</div>
-          <div class="form-group"> <label>联系方式</label> {% block mainbody1 %}
-            <p>{{tel}}</p> {% endblock %}</div>
-          <div class="form-group"> <label>常用地址</label> {% block mainbody2 %}
-            <p>{{address}}</p> {% endblock %}</div>
-          <a class="btn btn-primary" href="/user">返回</a>
+          <form class="" method="post" action="https://formspree.io/">
+            <div class="form-group"> <label>用户姓名</label> {% block mainbody0 %}
+              <p>{{name}}</p> {% endblock %}</div>
+            <div class="form-group"> <label>联系方式</label> {% block mainbody1 %}
+              <p>{{tel}}</p> {% endblock %}</div>
+            <div class="form-group"> <label>常用地址</label> {% block mainbody2 %}
+              <p>{{address}}</p> {% endblock %}</div>
+            <a class="btn btn-primary" href="/user">返回</a>
+          </form>
         </div>
       </div>
     </div>
