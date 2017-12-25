@@ -27,7 +27,6 @@ urlpatterns = [
     url(r'^getProvince/$',views.getProvince),
     url(r'^getCity/$',views.getCity),
     url(r'^userPackage/$',views.userPackage),
-    url(r'^userInfo/$',views.userInfo),
     url(r'^user/$',views.user),
     url(r'^admin/', admin.site.urls),
 ]
