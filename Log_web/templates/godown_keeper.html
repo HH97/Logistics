@@ -7,7 +7,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://v40.pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>
 
-<body>
+<body background="../static/bg5.jpg" style=" background-repeat:no-repeat ;
+background-size:100% 100%; 
+background-attachment:fixed;">
   <nav class="navbar navbar-expand-md bg-primary navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="user.html"><i class="fa d-inline fa-lg fa-cloud"></i><b>Home</b></a>
@@ -18,7 +20,7 @@
       </div>
     </div>
   </nav>
-  <div class="py-5 text-white opaque-overlay bg-secondary">
+  <div class="py-5 text-white opaque-overlay">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -26,8 +28,8 @@
           <br>
           <form class="form-inline justify-content-center">
             <div class="input-group my-1">
-              <input type="text" class="form-control mr-3 my-1" placeholder="包裹ID" id="inlineFormInputGroup">
-              <input type="text" class="form-control mr-3 my-1" placeholder="包裹状态" id="inlineFormInputGroup"> </div>
+              <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="包裹ID" id="inlineFormInputGroup">
+              <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="包裹状态" id="inlineFormInputGroup"> </div>
             <div class="input-group my-1"> {% for package_id in package_id_list %}
               <p>{{包裹id}}</p> {% endfor %} {% for package_addr in package_addr_list %}
               <p>{{配送员id}}</p> {% endfor %} </div>
@@ -38,43 +40,46 @@
     </div>
   </div>
   <form id="keeper_operation_Form" novalidate="" method="POST" action="/userPackage/">
-    <div class="py-5 text-light bg-secondary">
+    <div class="py-5 text-light">
       <div class="container">
         <div class="row">
           <div class="col-md-12 ">
             <h1>管理操作</h1>
             <div class="form-group"> <label for="InputName"></label> </div>
             <div class="form-group"> <label for="InputEmail1"></label> </div>
-            <div class="btn-group">
-              <a class="btn btn-light btn-lg dropdown-toggle my-1" href="javascript:void(0)" data-toggle="dropdown" id="package_id">选择包裹id</a>
+            <div class="btn-group opaque-overlay">
+              <a class="btn btn-light btn-lg dropdown-toggle my-1" href="javascript:void(0)" data-toggle="dropdown" id="package_id" style="WIDTH: 250px">选择包裹id</a>
               <div class="dropdown-menu scrollable-menu" id="package_id_list" role="menu">
                 <!--Added by godwn_kepper.js-->
               </div>
-            </div> <select name="status" id="status" class="form-control-lg">
-  								<option value="waiting_in">等待入库</option>
-  								<option value="waiting_out">等待配送</option>
+            </div>
+            <br><select name="status" id="status" class="form-control-lg" style="WIDTH: 250px;background-color:	#C0C0C0">
+  								<option value="waiting_in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等待入库</option>
+  								<option value="waiting_out">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等待配送</option>
 									</select>
-            <div class="btn-group">
-              <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" href="." id="SenderProvince">选择发送省份</a>
+            <br>
+            <div class="btn-group opaque-overlay">
+              <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" href="." id="SenderProvince" style="WIDTH: 250px">选择发送省份</a>
               <div class="dropdown-menu scrollable-menu" id="SenderProvinceList" role="menu">
                 <!--Added by form.js-->
               </div>
             </div>
-            <div class="btn-group">
-              <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" href="javascript:void(0)" id="SenderCity">选择发送城市</a>
+            <br>
+            <div class="btn-group opaque-overlay">
+              <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" href="javascript:void(0)" id="SenderCity" style="WIDTH: 250px">选择发送城市</a>
               <div class="dropdown-menu scrollable-menu" id="SenderCityList" role="menu">
                 <!--Added by form.js-->
               </div>
             </div>
-            <div class="btn-group">
-              <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" href="javascript:void(0)" id="courier_id">选择配送员</a>
+            <br>
+            <div class="btn-group opaque-overlay">
+              <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" href="javascript:void(0)" id="courier_id" style="WIDTH: 250px">选择配送员</a>
               <div class="dropdown-menu scrollable-menu" id="courier_id_list" role="menu">
                 <!--Added by godwn_kepper.js-->
               </div>
             </div>
-            <input type="text" class="form-control form-control-lg w-25" placeholder="包裹重量" id="package_weight" name="package_weight">
+            <input type="text" class="form-control form-control-lg text-center text-dark" placeholder="包裹重量" id="package_weight" name="package_weight" style="WIDTH: 250px;background-color:	#C0C0C0">
             <div class="col-md-12">
-              <div class="form-group bg-secondary"></div>
               <button type="submit" class="btn btn-primary ml-3">提交</button>
             </div>
           </div>
@@ -83,17 +88,11 @@
       </div>
     </div>
   </form>
-  <div class="py-5">
-    <div class="container">
-      <div class="row"></div>
-    </div>
-  </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="../static/jquery-validation-1.17.0/dist/jquery.validate.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"></script>
   <script src="../static/godwn_keeper.js"></script>
- 
 </body>
 
 </html>
