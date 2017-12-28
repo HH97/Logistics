@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 #登录用户信息表
+
 class Login_user(models.Model):
 	#attributes:
 	username = models.CharField(max_length=50,unique=True,primary_key=True)
@@ -62,12 +63,16 @@ class Godown(models.Model):
 
 #配送员工
 class Distributor(models.Model):
-	distributor_id = models.AutoField(primary_key=True)
-	godown_id = models.ForeignKey(
+	distributor = models.ForeignKey(
+		Login_user,
+		on_delete = models.CASCADE,
+	)
+	godown = models.ForeignKey(
 		Godown,
 		on_delete = models.SET_NULL,
 		null = True
 	)
+
 
 #包裹信息
 class Package_info(models.Model):
@@ -91,19 +96,22 @@ class Package_info(models.Model):
 
 #包裹配送信息
 class Distributor_package(models.Model):
-	distributor_id = models.ForeignKey(
+	distributor = models.ForeignKey(
 		Distributor,
 		on_delete = models.CASCADE,
 	)
-	package_id = models.ForeignKey(
+	package = models.ForeignKey(
 		Package,
 		on_delete = models.CASCADE,
 	)
 
 #线下管理人员表
 class Godown_staff(models.Model):
-	staff_id = models.AutoField(primary_key = True)
-	godown_id = models.ForeignKey(
+	staff = models.ForeignKey(
+		Login_user,
+		on_delete = models.CASCADE,
+	)
+	godown = models.ForeignKey(
 		Godown,
 		on_delete = models.SET_NULL,
 		null = True,

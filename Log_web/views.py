@@ -39,10 +39,23 @@ def signIn(request):
 		row = cursor.fetchone()
 		if(row[1]==password):
 			request.session['username'] = username
-			return HttpResponse(json.dumps({
-					'statCode' : 0,
-					'username' : username
-				}))
+			#根据用户的类型需要跳转到不同的页面
+			count_type = row[2]
+			if count_type == 1 : 
+				return HttpResponse(json.dumps({
+						'statCode' : 0,
+						'username' : username
+					}))
+			elif count_type == 2:
+				return HttpResponse(json.dumps({
+						'statCode' : 1,
+						'username' : username
+					}))
+			else:
+				return HttpResponse(json.dumps({
+						'statCode' : 0,
+						'username' : username
+					}))
 		else:
 			return HttpResponse(json.dumps({
 					'statCode' : -3,
@@ -255,4 +268,26 @@ def userPackage(request):
 		return render(request,"to_be_received_packages.html",{
 					'packages':res_mes
 				})
+'''
+def godownKeeper(request):
+	try:
+		res_mes = {}
+		if request.session['username'] = '':
+			package = {}
+			package['id'] = '--'
+			package['status'] = '--'
+			res_mes.append(package)
+		else:
+			cursor = connection.cursor()
+			cursor.execute('select count_type from Log_web_login_user \
+				where username = %s',[request.session['username']])
+			user_type = cursor.fetchall()
+			if not user_type == 2:
+				package = {}
+				package['id'] = '--'
+				package['status'] = '--'
+				res_mes.append(package)
+			else:
 
+	except Exception:
+'''
