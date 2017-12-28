@@ -38,16 +38,16 @@ background-attachment:fixed;">
           <div class="input-group my-1"> {% for package in packages %}
             <div class="row">
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>包裹id:{{}}</p>
+                <p>包裹id:{{package.id}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>包裹状态:{{}}</p>
+                <p>包裹状态:{{package.status}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>包裹位置:{{}}</p>
+                <p>包裹位置:{{package.position}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>配送员工id:{{}}</p>
+                <p>配送员工id:{{package.dostributor}}</p>
               </div>
             </div>
             <br> {% endfor %} </div>
