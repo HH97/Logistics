@@ -41,8 +41,10 @@ function Func_signIn(){
 	}).done(function(data){
 		if(data.statCode != 0){
 			alert(data.errormessage)
-		}else{
+		}else if(data.statCode == 0){
 			location.replace("/user/")
+		}else if(data.statCode == 1){
+			location.replace("/godown_keeper/")
 		}
 	})
 }

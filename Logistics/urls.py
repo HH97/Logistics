@@ -30,5 +30,6 @@ urlpatterns = [
     url(r'^userInfo/$',views.userInfo),
     url(r'^user/$',views.user),
     url(r'^logout/$',views.logout),
+#    url(r'^godown_keeper/$',views.godownKeeper),
     url(r'^admin/', admin.site.urls),
 ]
