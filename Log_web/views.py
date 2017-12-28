@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import json
 from Log_web.models import *
 from django.db import connection
+import traceback
 
 # Create your views here.
 def index(request):
@@ -144,6 +145,7 @@ def userPackage(request):
 		cursor.execute('insert into Log_web_package values(0,%s)',
 			[request.session['username']])
 		package_id = cursor.lastrowid
+		print('package_id %d',package_id)
 		cursor.execute('insert into Log_web_package_send\
 			(id,package_id_id,addr_pro,addr_city,addr_district,addr_block,tel)\
 			values(0,%s,%s,%s,%s,%s,%s)',[
@@ -175,8 +177,8 @@ def userPackage(request):
 			values(0,0.0,%s,%s,null,%s,%s)',[
 				mes['transType'],
 				'等待揽收',
+				str(godown_id),
 				str(package_id),
-				str(godown_id)
 			])
 		#更新用户信息表
 		cursor.execute('update Log_web_user_info set tel=%s , addr_pro=%s , \
@@ -194,6 +196,7 @@ def userPackage(request):
 				'successmessage' : '您的包裹ID为'+str(package_id)+",正在等待揽收",
 			}))
 	except Exception:
+		traceback.print_exc()
 		return HttpResponse(json.dumps({
 				'statCode' : -2,
 				'errormessage' : 'Backend processing Error!',
@@ -224,7 +227,7 @@ def logout(request):
 	request.session['username'] = ''
 	return render(request,'index.html')
 
-def userPackage(request):
+def userPackages(request):
 	try:
 		res_mes = []
 		if request.session['username'] == '':
