@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://v40.pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>
+
+<body background="../static/bg7.jpg" style=" background-repeat:no-repeat ;
+background-size:100% 100%; 
+background-attachment:fixed;">
+  <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="user.html"><i class="fa d-inline fa-lg fa-cloud"></i><b>Home</b></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="/logout"><i class="fa d-inline fa-lg fa-user-circle-o"></i> Logout</a>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <form action="/userPackage/" id="keeper_operation_Form" method="POST" novalidate=""></form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 opaque-overlay">
+          <h1 class="text-light">公司管理</h1>
+          <br>
+          <form class="form-inline justify-content-center">
+            <div class="input-group my-1">
+              <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="公司名称" id="inlineFormInputGroup">
+              <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="运费总额" id="inlineFormInputGroup"> </div>
+          </form>
+          <br>
+          <a class="btn btn-primary" href="/user">返回</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="../static/jquery-validation-1.17.0/dist/jquery.validate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"></script>
+  <script src="../static/godwn_keeper.js"></script>
+</body>
+
+</html>
