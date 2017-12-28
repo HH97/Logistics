@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://v40.pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>
 
-<body background="../static/bg6.jpg" style=" background-repeat:no-repeat ;
+<body background="../static/bg5.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%; 
 background-attachment:fixed;">
   <nav class="navbar navbar-expand-md bg-primary navbar-dark">
@@ -20,19 +20,23 @@ background-attachment:fixed;">
       </div>
     </div>
   </nav>
-  <div class="py-5 text-light">
+  <div class="py-5 text-white">
     <div class="container">
       <div class="row">
         <div class="col-md-12 opaque-overlay">
-          <h1 class="text-light">我所管理的包裹</h1>
+          <h1 class="text-secondary">我配送的包裹</h1>
           <br>
           <form class="form-inline justify-content-center">
             <div class="input-group my-1">
               <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="包裹ID" id="inlineFormInputGroup">
-              <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="包裹状态" id="inlineFormInputGroup"> </div>
+              <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="收件人姓名" id="inlineFormInputGroup"> </div>
+            <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="收件人联系方式" id="inlineFormInputGroup">
+            <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="收件人地址" id="inlineFormInputGroup">
             <div class="input-group my-1"> {% for package_id in package_id_list %}
-              <p>{{包裹id}}</p> {% endfor %} {% for package_addr in package_addr_list %}
-              <p>{{配送员id}}</p> {% endfor %} </div>
+              <p>{{包裹id}}</p> {% endfor %} {% for receiver_name in receiver_name_list %}
+              <p>{{收件人姓名}}</p> {% endfor %} {% for receiver_tele in receiver_tele_list %}
+              <p>{{收件人联系方式}}</p> {% endfor %} {% for receiver_addr in receiver_addr_list %}
+              <p>{{收件人地址}}</p> {% endfor %} </div>
           </form>
           <a class="btn btn-primary" href="/user">返回</a>
         </div>
@@ -40,10 +44,10 @@ background-attachment:fixed;">
     </div>
   </div>
   <form id="keeper_operation_Form" novalidate="" method="POST" action="/userPackage/">
-    <div class="py-5 text-light opaque-overlay">
+    <div class="py-5 text-light">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 ">
+          <div class="col-md-12">
             <h1>管理操作</h1>
             <div class="form-group"> <label for="InputName"></label> </div>
             <div class="form-group"> <label for="InputEmail1"></label> </div>
@@ -54,31 +58,13 @@ background-attachment:fixed;">
               </div>
             </div>
             <br><select name="status" id="status" class="form-control-lg" style="WIDTH: 250px;background-color:	#C0C0C0">
-  								<option value="waiting_in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等待入库</option>
-  								<option value="waiting_out">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等待配送</option>
+            			<option value="not_sending">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未配送</option>
+            			<option value="sending">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在派送</option>
+  								<option value="success_receive">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已签收</option>
+  								<option value="field_receive">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;配送失败</option>
 									</select>
             <br>
-            <div class="btn-group opaque-overlay">
-              <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" href="." id="SenderProvince" style="WIDTH: 250px">选择发送省份</a>
-              <div class="dropdown-menu scrollable-menu" id="SenderProvinceList" role="menu">
-                <!--Added by form.js-->
-              </div>
-            </div>
             <br>
-            <div class="btn-group opaque-overlay">
-              <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" href="javascript:void(0)" id="SenderCity" style="WIDTH: 250px">选择发送城市</a>
-              <div class="dropdown-menu scrollable-menu" id="SenderCityList" role="menu">
-                <!--Added by form.js-->
-              </div>
-            </div>
-            <br>
-            <div class="btn-group opaque-overlay">
-              <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" href="javascript:void(0)" id="courier_id" style="WIDTH: 250px">选择配送员</a>
-              <div class="dropdown-menu scrollable-menu" id="courier_id_list" role="menu">
-                <!--Added by godwn_kepper.js-->
-              </div>
-            </div>
-            <input type="text" class="form-control form-control-lg text-center text-dark" placeholder="包裹重量" id="package_weight" name="package_weight" style="WIDTH: 250px;background-color:	#C0C0C0">
             <div class="col-md-12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="submit" class="btn btn-primary ml-3 text-center">提交</button>
             </div>
@@ -94,7 +80,6 @@ background-attachment:fixed;">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"></script>
   <script src="../static/godwn_keeper.js"></script>
-  
 </body>
 
 </html>

@@ -35,8 +35,7 @@
 		})
 		
 	 $(this).parent().prev().text($(this).text())
-		$("#courier_id").removeClass("disabled")
-			
+		$("#courier_id").removeClass("disabled")	
 		$.ajax('/get_courier_id/',{
 				dataType:'json',
 				data:{'courier_id':$(this).text()}
