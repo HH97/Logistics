@@ -37,20 +37,17 @@ background-attachment:fixed;">
           <br>
           <div class="input-group my-1"> {% for package in packages %}
             <div class="row">
-              <p>包裹id</p>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>{{package.id}}</p>
-              </div>
-              <p>包裹状态</p>
-              <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>{{package.status}}</p>
-              </div>
-              <p>包裹位置</p>
-              <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>{{package.position}}</p>
+                <p>包裹id:{{}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>{{package.dostributor}}</p>
+                <p>包裹状态:{{}}</p>
+              </div>
+              <div class="col-md-3 text-md-left text-center align-self-center my-4">
+                <p>包裹位置:{{}}</p>
+              </div>
+              <div class="col-md-3 text-md-left text-center align-self-center my-4">
+                <p>配送员工id:{{}}</p>
               </div>
             </div>
             <br> {% endfor %} </div>
