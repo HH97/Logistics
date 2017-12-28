@@ -223,10 +223,6 @@ def userInfo(request):
 		return render(request,"user_info.html",
 				{'name':'--','tel':'--','address':'--'})
 
-def logout(request):
-	request.session['username'] = ''
-	return render(request,'index.html')
-
 def userPackages(request):
 	try:
 		res_mes = []

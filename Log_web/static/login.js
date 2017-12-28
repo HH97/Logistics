@@ -39,7 +39,7 @@ function Func_signIn(){
 			"password":$("#password").val()
 		}
 	}).done(function(data){
-		if(data.statCode != 0){
+		if(data.statCode < 0){
 			alert(data.errormessage)
 		}else if(data.statCode == 0){
 			location.replace("/user/")
