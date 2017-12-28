@@ -187,22 +187,72 @@ def userPackage(request):
 			}))
 
 def userInfo(request):
-	if request.session['username'] == '':
+	try:
+		if request.session['username'] == '':
+			return render(request,"user_info.html",
+				{'name':'--','tel':'--','address':'--'})
+		else:
+			cursor = connection.cursor()
+			cursor.execute('select * from Log_web_user_info where user_name = %s'
+				,[request.session['username']])
+			row = cursor.fetchall()
+			tel = row[0][5]
+			address = row[0][1] + row[0][2] + row[0][3] + row[0][4]
+			return render(request,"user_info.html",{
+					'name':request.session['username'],
+					'tel':tel,
+					'address':address
+				})
+	except Exception:
 		return render(request,"user_info.html",
-			{'name':'--','tel':'--','address':'--'})
-	else:
-		cursor = connection.cursor()
-		cursor.execute('select * from Log_web_user_info where user_name = %s'
-			,[request.session['username']])
-		row = cursor.fetchall()
-		tel = row[0][5]
-		address = row[0][1] + row[0][2] + row[0][3] + row[0][4]
-		return render(request,"user_info.html",{
-			'name':request.session['username'],
-			'tel':tel,
-			'address':address
-			}) 
+				{'name':'--','tel':'--','address':'--'})
 
 def logout(request):
 	request.session['username'] = ''
 	return render(request,'index.html')
+
+def userPackage(request):
+	try:
+		res_mes = []
+		if request.session['username'] == '':
+			package = {}
+			package['id'] = '--'
+			package['status'] = '--'
+			package['position'] = '--'
+			package['distributor'] = '--'
+			res_mes.append(package)
+		else:
+			username = request.session['username']
+			cursor = connection.cursor()
+			flag = cursor.execute('select package_id_id , Distributor_id_id,\
+				godown_id_id,status from Log_web_package_info \
+				where package_id_id in (select package_id \
+				from Log_web_package where username_id = %s)',[username])
+			if flag:
+				packages = cursor.fetchall()
+				for pack in packages:
+					pack_tmp = {}
+					pack_tmp['id'] = pack[0]
+					pack_tmp['status'] = pack[3]
+					pack_tmp['distributor'] = pack[1]
+					godown_tmp = pack[2]
+					cursor.execute("select addr_pro,addr_city from Log_web_godown\
+						where godown_id = %s",[godown_tmp])
+					row = cursor.fetchall()
+					pack_tmp['position'] = row[0][0] + row[0][1]
+					res_mes.append(pack_tmp)
+			else:
+				package = {}
+				package['id'] = '--'
+				package['status'] = '--'
+				package['position'] = '--'
+				package['distributor'] = '--'
+				res_mes.append(package)
+		return render(request,"to_be_received_packages.html",{
+					'packages':res_mes
+				})
+	except Exception:
+		return render(request,"to_be_received_packages.html",{
+					'packages':res_mes
+				})
+
