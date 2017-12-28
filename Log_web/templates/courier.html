@@ -33,9 +33,9 @@ background-attachment:fixed;">
             <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="收件人联系方式" id="inlineFormInputGroup">
             <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="收件人地址" id="inlineFormInputGroup">
             <div class="input-group my-1"> {% for package_id in package_id_list %}
-              <p>{{包裹id}}</p> {% endfor %} {% for receiver_name in receiver_name_list %}
-              <p>{{收件人姓名}}</p> {% endfor %} {% for receiver_tele in receiver_tele_list %}
-              <p>{{收件人联系方式}}</p> {% endfor %} {% for receiver_addr in receiver_addr_list %}
+              <p>{{包裹id}}</p>
+              <p>{{收件人姓名}}</p>
+              <p>{{收件人联系方式}}</p>
               <p>{{收件人地址}}</p> {% endfor %} </div>
           </form>
           <a class="btn btn-primary" href="/user">返回</a>
