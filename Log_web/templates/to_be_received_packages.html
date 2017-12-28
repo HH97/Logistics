@@ -34,10 +34,10 @@ background-attachment:fixed;">
       <div class="row">
         <div class="col-md-12 opaque-overlay">
           <h1 class="text-secondary">待收包裹</h1>
-          <br>
-          <div class="input-group my-1"> {% for package in packages %}
+          <br> {% for package in packages %}
+          <div class="input-group my-1">
             <div class="row">
-              <div class="col-md-3 text-md-left text-center align-self-center my-4">
+              <div class="col-md-3 text-md-left align-self-center my-4 text-center">
                 <p>包裹id:{{package.id}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
@@ -50,8 +50,7 @@ background-attachment:fixed;">
                 <p>配送员工id:{{package.dostributor}}</p>
               </div>
             </div>
-            <br> {% endfor %} </div>
-        </div>
+          </div>{% endfor %} </div>
       </div>
     </div>
   </div>

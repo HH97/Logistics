@@ -25,29 +25,23 @@ background-attachment:fixed;">
       <div class="row">
         <div class="col-md-12 opaque-overlay">
           <h1 class="text-secondary">我配送的包裹</h1>
-          <br>
-          <form class="form-inline justify-content-center">
-            <div class="input-group my-1">
-              <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="包裹ID" id="inlineFormInputGroup">
-              <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="收件人姓名" id="inlineFormInputGroup"> </div>
-            <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="收件人联系方式" id="inlineFormInputGroup">
-            <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="收件人地址" id="inlineFormInputGroup">
-            <div class="input-group my-1"> {% for package_id in package_id_list %}
-              <div class="row">
-                <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                  <p>{{包裹id}}</p>
-                </div>
-                <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                  <p>{{收件人姓名}}</p>
-                </div>
-                <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                  <p>{{收件人联系方式}}</p>
-                </div>
-                <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                  <p>{{收件人地址}}</p>
-                </div>
-              </div>{% endfor %} </div>
-          </form>
+          <br> {% for package_id in package_id_list %}
+          <div class="input-group my-1">
+            <div class="row">
+              <div class="col-md-3 text-md-left text-center align-self-center my-4">
+                <p>包裹id:{{包裹id}}</p>
+              </div>
+              <div class="col-md-3 text-md-left text-center align-self-center my-4">
+                <p class="">收件人姓名:{{收件人姓名}}</p>
+              </div>
+              <div class="col-md-3 text-md-left text-center align-self-center my-4">
+                <p>收件人联系方式:{{收件人联系方式}}</p>
+              </div>
+              <div class="col-md-3 text-md-left text-center align-self-center my-4">
+                <p>收件人地址:{{收件人地址}}</p>
+              </div>
+            </div>
+          </div> {% endfor %}
           <a class="btn btn-primary" href="/user">返回</a>
         </div>
       </div>
