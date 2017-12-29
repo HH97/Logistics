@@ -34,12 +34,12 @@ background-attachment:fixed;">
       <div class="row">
         <div class="col-md-12 opaque-overlay">
           <h1 class="text-light">公司管理</h1>
-          <br>
+          <br>{% block mainbody0 %}
           <form class="form-inline justify-content-center">
             <div class="input-group my-1">
               <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="公司名称" id="inlineFormInputGroup">
               <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="运费总额" id="inlineFormInputGroup"> </div>
-          </form>
+          </form> {% endblock %}
           <br>
           <a class="btn btn-primary" href="/user">返回</a>
         </div>
@@ -52,6 +52,7 @@ background-attachment:fixed;">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"></script>
   <script src="../static/godwn_keeper.js"></script>
+
 </body>
 
 </html>
