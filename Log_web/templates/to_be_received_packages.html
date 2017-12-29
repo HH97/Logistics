@@ -34,24 +34,23 @@ background-attachment:fixed;">
       <div class="row">
         <div class="col-md-12 opaque-overlay">
           <h1 class="text-secondary">待收包裹</h1>
-          <br>
-          <div class="input-group my-1"> {% for package in packages %}
+          <br> {% for package in packages %}
+          <div class="input-group my-1">
             <div class="row">
-              <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>包裹id:{{}}</p>
+              <div class="col-md-3 text-md-left align-self-center my-4 text-center">
+                <p>包裹id:{{package.id}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>包裹状态:{{}}</p>
+                <p>包裹状态:{{package.status}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>包裹位置:{{}}</p>
+                <p>包裹位置:{{package.position}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>配送员工id:{{}}</p>
+                <p>配送员工id:{{package.dostributor}}</p>
               </div>
             </div>
-            <br> {% endfor %} </div>
-        </div>
+          </div>{% endfor %} </div>
       </div>
     </div>
   </div>
@@ -72,9 +71,7 @@ background-attachment:fixed;">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:110px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">made with&nbsp;&nbsp;
-    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
-  </pingendo>
+
 </body>
 
 </html>
