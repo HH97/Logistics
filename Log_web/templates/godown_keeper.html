@@ -33,6 +33,9 @@ background-attachment:fixed;">
             <div class="col-md-3 text-md-left text-center align-self-center my-4">
               <p>包裹状态:{{package.status}}</p>
             </div>
+            <div class="col-md-3 text-md-left text-center align-self-center my-4">
+              <p>收件地址:{{package.address}}</p>
+            </div>
           </div>{% endfor %} </div>
       </div>
     </div>
@@ -45,38 +48,45 @@ background-attachment:fixed;">
             <h1>管理操作</h1>
             <div class="form-group"> <label for="InputName"></label> </div>
             <div class="form-group"> <label for="InputEmail1"></label> </div>
-            <div class="btn-group opaque-overlay">
-              <a class="btn btn-light btn-lg dropdown-toggle my-1" href="javascript:void(0)" data-toggle="dropdown" id="package_id" style="WIDTH: 250px">选择包裹id</a>
+            <div class="btn-group">
+              <a class="btn btn-light btn-lg dropdown-toggle my-1" href="." data-toggle="dropdown" id="package_id" style="WIDTH: 250px">选择包裹id</a>
               <div class="dropdown-menu scrollable-menu" id="package_id_list" role="menu">
                 <!--Added by godwn_kepper.js-->
               </div>
             </div>
-            <br><select name="status" id="status" class="form-control-lg" style="WIDTH: 250px;background-color:	#C0C0C0">
-  								<option value="waiting_in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等待入库</option>
-  								<option value="waiting_out">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等待配送</option>
-									</select>
+            <br><select name="status" id="status" class="form-control-lg" style="WIDTH: 250px;background-color: #C0C0C0">
+                  <option value="等待入库">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等待入库</option>
+                  <option value="等待配送">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等待配送</option>
+                  </select>
             <br>
-            <div class="btn-group opaque-overlay">
-              <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" href="." id="SenderProvince" style="WIDTH: 250px">选择发送省份</a>
+            <div class="btn-group">
+              <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" href="." id="SenderProvince" style="WIDTH: 250px">选择发送省份</a>
               <div class="dropdown-menu scrollable-menu" id="SenderProvinceList" role="menu">
                 <!--Added by form.js-->
               </div>
             </div>
             <br>
-            <div class="btn-group opaque-overlay">
+            <div class="btn-group">
               <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" href="javascript:void(0)" id="SenderCity" style="WIDTH: 250px">选择发送城市</a>
               <div class="dropdown-menu scrollable-menu" id="SenderCityList" role="menu">
                 <!--Added by form.js-->
               </div>
             </div>
             <br>
-            <div class="btn-group opaque-overlay">
-              <a class="btn btn-light btn-lg dropdown-toggle my-1" data-toggle="dropdown" href="javascript:void(0)" id="courier_id" style="WIDTH: 250px">选择配送员</a>
-              <div class="dropdown-menu scrollable-menu" id="courier_id_list" role="menu">
+            <div class="btn-group">
+              <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" href="javascript:void(0)" id="SenderGodown" style="WIDTH: 250px">选择线下仓库</a>
+              <div class="dropdown-menu scrollable-menu" id="SenderGodownList" role="menu">
+                <!--Added by form.js-->
+              </div>
+            </div>
+            <br>
+            <div class="btn-group">
+              <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" href="javascript:void(0)" id="distributor_id" style="WIDTH: 250px">选择配送员</a>
+              <div class="dropdown-menu scrollable-menu" id="distributor_id_list" role="menu">
                 <!--Added by godwn_kepper.js-->
               </div>
             </div>
-            <input type="text" class="form-control form-control-lg text-center text-dark" placeholder="包裹重量" id="package_weight" name="package_weight" style="WIDTH: 250px;background-color:	#C0C0C0">
+            <input type="text" disabled='disabled' value='--' class="form-control form-control-lg text-center text-dark" placeholder="包裹重量" id="package_weight" name="package_weight" style="WIDTH: 250px;background-color:  #C0C0C0">
             <div class="col-md-12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="submit" class="btn btn-primary ml-3 text-center">提交</button>
             </div>
@@ -91,7 +101,7 @@ background-attachment:fixed;">
   <script src="../static/jquery-validation-1.17.0/dist/jquery.validate.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"></script>
-  <script src="../static/godwn_keeper.js"></script>
+  <script src="../static/godown_keeper.js"></script>
 
 </body>
 

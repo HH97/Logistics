@@ -32,4 +32,9 @@ urlpatterns = [
     url(r'^user/$',views.user),
     url(r'^godown_keeper/$',views.godownKeeper),
     url(r'^admin/', admin.site.urls),
+    url(r'^get_package_id/$', views.godownGetPackageId),
+    url(r'^getWeight/$', views.getWeight),
+    url(r'^getDistributor/$', views.getDistributor),
+    url(r'^getGodown/$',views.getGodown),
+    url(r'^godownkeeper_package/$',views.godownKeeperPackage),
 ]

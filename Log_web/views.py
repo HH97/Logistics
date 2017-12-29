@@ -275,6 +275,7 @@ def godownKeeper(request):
 			package = {}
 			package['id'] = '--'
 			package['status'] = '--'
+			package['address'] = '--'
 			res_mes.append(package)
 		else:
 			cursor = connection.cursor()
@@ -285,6 +286,7 @@ def godownKeeper(request):
 				package = {}
 				package['id'] = '--'
 				package['status'] = '--'
+				package['address'] = '--'
 				res_mes.append(package)
 			else:
 				#首先获得godownid，再查包裹
@@ -299,13 +301,143 @@ def godownKeeper(request):
 						pack_tmp = {}
 						pack_tmp['id'] = pack[0]
 						pack_tmp['status'] = pack[1]
+						cursor.execute("select addr_pro,addr_city \
+							from Log_web_package_receive\
+							where package_id_id = %s",pack[0])
+						addr = cursor.fetchall()
+						pack_tmp['address'] = addr[0][0] + addr[0][1]
 						res_mes.append(pack_tmp)
 				else:
 					package = {}
 					package['id'] = '--'
 					package['status'] = '--'
+					package['address'] = '--'
 					res_mes.append(package)
 		return render(request,"godown_keeper.html",{'packages':res_mes})
 	except Exception:
 		traceback.print_exc()
 		return render(request,"godown_keeper.html",{'packages':res_mes})
+
+def godownGetPackageId(request):
+	if request.session['username'] == '':
+		res = {'package_id':'--'}
+		return HttpResponse(json.dumps(res))
+	cursor = connection.cursor()
+	cursor.execute('select package_id_id\
+					from Log_web_package_info \
+					where godown_id_id in \
+					(select godown_id from Log_web_godown_staff \
+					where staff_id=%s)',[request.session['username']])
+	row = cursor.fetchall()
+	res = {}
+	res['package_id'] = row
+	return HttpResponse(json.dumps(res))
+
+def getWeight(request):
+	try:
+		package = request.GET['package']
+		cursor = connection.cursor()
+		cursor.execute('select weight from Log_web_package_info \
+			where package_id_id=%s',[package])
+		row = cursor.fetchall()
+		if row[0][0] < 0.000001:
+			return HttpResponse(json.dumps({
+				'statCode' : 1,
+			}))
+		else:
+			return HttpResponse(json.dumps({
+				'statCode' : 0,
+			}))
+	except Exception:
+		traceback.print_exc()
+		return HttpResponse(json.dumps({
+				'statCode' : 0,
+			}))
+
+
+def getDistributor(request):
+	distributor_list = []
+	try:
+		godown = request.GET['godown']
+		cursor = connection.cursor()
+		flag = cursor.execute('select staff_id from Log_web_godown_staff \
+			where godown_id=%s',[godown])
+		if flag:
+			distributor_list = list(cursor.fetchall())
+		distributor_list.append('--')
+		return HttpResponse(json.dumps({
+				'distributor_id':distributor_list,
+			}))
+	except Exception: 
+		traceback.print_exc()
+		distributor_list.append('--')
+		return HttpResponse(json.dumps({
+				'distributor_id':distributor_list,
+			}))
+
+def getGodown(request):
+	godown_list = []
+	try:
+		province = request.GET['province']
+		city = request.GET['city']
+		cursor = connection.cursor()
+		flag = cursor.execute('select godown_id from Log_web_godown\
+			where addr_pro = %s and addr_city = %s',[province,city])
+		if flag:
+			godown_list = list(cursor.fetchall())
+		godown_list.append('--')
+		return HttpResponse(json.dumps({
+				'godown_id':godown_list,
+			}))	
+	except Exception:
+		traceback.print_exc()
+		godown_list.append('--')
+		return HttpResponse(json.dumps({
+				'godown_id':godown_list,
+			}))	
+
+def godownKeeperPackage(request):
+	try:
+		print(dict(request.GET))
+		package_id = request.GET['package_id']
+		status = request.GET['status']
+		godown = request.GET['godown']
+		package_weight = request.GET['package_weight']
+		distributor = request.GET['distributor']
+		cursor = connection.cursor()
+		if package_weight == '--':
+			if distributor == '--':
+				cursor.execute('update Log_web_package_info \
+					set status = %s , godown_id_id = %s \
+					where package_id_id = %s',[status,godown,package_id])
+			else:
+				cursor.execute('update Log_web_package_info \
+					set status = %s , godown_id_id = %s ,Distributor_id_id = %s\
+					where package_id_id = %s',[status,godown,distributor,package_id])
+		else:
+			money = 8 * int(package_weight);
+			cursor.execute('select sum_money from Log_web_company where name=%s',['LOGISTICS'])
+			money = money + cursor.fetchall()[0][0]
+			cursor.execute('update Log_web_company set sum_money=%s\
+				where name=%s',[money,'LOGISTICS'])
+			if distributor == '--':
+				cursor.execute('update Log_web_package_info \
+					set status = %s , godown_id_id = %s , weight = %s \
+					where package_id_id = %s',[status,godown,package_weight,package_id])
+			else:
+				cursor.execute('update Log_web_package_info \
+					set status = %s , godown_id_id = %s ,\
+					Distributor_id_id = %s, weight = %s\
+					where package_id_id = %s',
+					[status,godown,distributor,package_weight,package_id])
+		return HttpResponse(json.dumps({
+				'statCode' : 0,
+				'successmessage': 'Package info has changed successfully.',
+			}))	
+	except Exception:
+		traceback.print_exc()
+		return HttpResponse(json.dumps({
+				'statCode' : -2,
+				'errormessage' : 'Backend processing Error!',
+			}))
+
