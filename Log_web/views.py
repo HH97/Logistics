@@ -267,11 +267,11 @@ def userPackages(request):
 		return render(request,"to_be_received_packages.html",{
 					'packages':res_mes
 				})
-'''
+
 def godownKeeper(request):
 	try:
-		res_mes = {}
-		if request.session['username'] = '':
+		res_mes = []
+		if request.session['username'] == '':
 			package = {}
 			package['id'] = '--'
 			package['status'] = '--'
@@ -280,13 +280,32 @@ def godownKeeper(request):
 			cursor = connection.cursor()
 			cursor.execute('select count_type from Log_web_login_user \
 				where username = %s',[request.session['username']])
-			user_type = cursor.fetchall()
+			user_type = cursor.fetchall()[0][0]
 			if not user_type == 2:
 				package = {}
 				package['id'] = '--'
 				package['status'] = '--'
 				res_mes.append(package)
 			else:
-
+				#首先获得godownid，再查包裹
+				flag = cursor.execute('select package_id_id , status \
+					from Log_web_package_info \
+					where godown_id_id in \
+					(select godown_id from Log_web_godown_staff \
+					where staff_id=%s)',[request.session['username']])
+				if flag:
+					packages = cursor.fetchall()
+					for pack in packages:
+						pack_tmp = {}
+						pack_tmp['id'] = pack[0]
+						pack_tmp['status'] = pack[1]
+						res_mes.append(pack_tmp)
+				else:
+					package = {}
+					package['id'] = '--'
+					package['status'] = '--'
+					res_mes.append(package)
+		return render(request,"godown_keeper.html",{'packages':res_mes})
 	except Exception:
-'''
+		traceback.print_exc()
+		return render(request,"godown_keeper.html",{'packages':res_mes})
