@@ -96,17 +96,6 @@ class Package_info(models.Model):
 	)
 	status = models.CharField(max_length=100)
 
-#包裹配送信息
-class Distributor_package(models.Model):
-	distributor = models.ForeignKey(
-		Distributor,
-		on_delete = models.CASCADE,
-	)
-	package = models.ForeignKey(
-		Package,
-		on_delete = models.CASCADE,
-	)
-
 #线下管理人员表
 class Godown_staff(models.Model):
 	staff = models.ForeignKey(
