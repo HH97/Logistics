@@ -550,3 +550,12 @@ def packageDistribute(request):
 				'statCode' : -3,
 				'errormessage' : 'Backend processing Error!',
 			}))
+
+def company(request):
+	cursor = connection.cursor()
+	cursor.execute('select * from Log_web_company');
+	row = cursor.fetchall()
+	return render(request,"company_manager.html",{
+			'company_name':row[0][1],
+			'sum_money':row[0][2]
+		})
