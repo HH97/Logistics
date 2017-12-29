@@ -38,4 +38,7 @@ urlpatterns = [
     url(r'^getGodown/$',views.getGodown),
     url(r'^godownkeeper_package/$',views.godownKeeperPackage),
     url(r'^distribute/$',views.distribute),
+    url(r'^distriPackage/$',views.disGetPackageId),
+    url(r'^distribute_package/$',views.packageDistribute),
+    url(r'^company/$',views.company),
 ]

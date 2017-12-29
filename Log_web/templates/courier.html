@@ -16,7 +16,7 @@ background-attachment:fixed;">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
         aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="/logout"><i class="fa d-inline fa-lg fa-user-circle-o"></i> Logout</a>
+        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="/logout"><i class="fa d-inline fa-lg fa-user-circle-o" href="/"></i> Logout</a>
       </div>
     </div>
   </nav>
@@ -24,7 +24,7 @@ background-attachment:fixed;">
     <div class="container">
       <div class="row">
         <div class="col-md-12 opaque-overlay">
-          <h1 class="text-secondary">我配送的包裹</h1>
+          <h1 class="text-secondary">配送的包裹</h1>
           <br> {% for package in packages %}
           <div class="input-group my-1">
             <div class="row">
@@ -54,17 +54,17 @@ background-attachment:fixed;">
             <h1>管理操作</h1>
             <div class="form-group"> <label for="InputName"></label> </div>
             <div class="form-group"> <label for="InputEmail1"></label> </div>
-            <div class="btn-group opaque-overlay">
+            <div class="btn-group">
               <a class="btn btn-light btn-lg dropdown-toggle my-1" href="javascript:void(0)" data-toggle="dropdown" id="package_id" style="WIDTH: 250px">选择包裹id</a>
               <div class="dropdown-menu scrollable-menu" id="package_id_list" role="menu">
                 <!--Added by godwn_kepper.js-->
               </div>
             </div>
             <br><select name="status" id="status" class="form-control-lg" style="WIDTH: 250px;background-color:	#C0C0C0">
-            			<option value="not_sending">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未配送</option>
-            			<option value="sending">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在派送</option>
-  								<option value="success_receive">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已签收</option>
-  								<option value="field_receive">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;配送失败</option>
+            			<option value="等待配送">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等待配送</option>
+            			<option value="正在派送">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在派送</option>
+  								<option value="已签收">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已签收</option>
+  								<option value="配送失败">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;配送失败</option>
 									</select>
             <br>
             <br>

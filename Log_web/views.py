@@ -501,3 +501,52 @@ def distribute(request):
 	except Exception:
 		traceback.print_exc()
 		return render(request,"courier.html",{'packages':res_mes})
+
+def disGetPackageId(request):
+	if request.session['username'] == '':
+		res = {'package_id':'--'}
+		return HttpResponse(json.dumps(res))
+	cursor = connection.cursor()
+	cursor.execute('select package_id_id\
+					from Log_web_package_info \
+					where godown_id_id in \
+					(select godown_id from Log_web_distributor \
+					where distributor_id=%s)',[request.session['username']])
+	row = cursor.fetchall()
+	res = {}
+	res['package_id'] = row
+	return HttpResponse(json.dumps(res))
+
+def packageDistribute(request):
+	try:
+		if request.session['username'] == '':
+			return HttpResponse(json.dumps({
+				'statCode' : -1,
+				'errormessage' : 'Please login first!',
+			}))
+		else:
+			cursor = connection.cursor()
+			cursor.execute('select count_type from Log_web_login_user\
+				where username=%s',[request.session['username']])
+			user_type = cursor.fetchall()[0][0]
+			if not user_type == 3:
+				return HttpResponse(json.dumps({
+					'statCode' : -2,
+					'errormessage' : 'You do not have enough permission!',
+				}))
+			else:
+				package = request.GET['package_id']
+				status = request.GET['status']
+				cursor = connection.cursor()
+				cursor.execute('update Log_web_package_info set status=%s \
+					where package_id_id=%s',[status,package])
+				return HttpResponse(json.dumps({
+					'statCode' : 0,
+					'successmessage' : 'Package status has changed successfully!',
+				}))
+	except Exception:
+		traceback.print_exc()
+		return HttpResponse(json.dumps({
+				'statCode' : -3,
+				'errormessage' : 'Backend processing Error!',
+			}))
