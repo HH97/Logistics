@@ -20,18 +20,18 @@ background-attachment:fixed;">
       </div>
     </div>
   </nav>
-  <div class="py-5 text-light">
+  <div class="py-5 text-white">
     <div class="container">
       <div class="row">
-        <div class="col-md-12 opaque-overlay">
-          <h1 class="text-light">我所管理的包裹</h1>
+        <div class="col-md-12 opaque-overlay" style="background:#C0C0C0 ;opacity:0.9;filter:alpha(opacity=90)">
+          <h1 class="text-secondary"> 我所管理的包裹</h1>
           <br>{% for package in packages %}
           <div class="input-group my-1">
             <div class="col-md-3 text-md-left text-center align-self-center my-4">
-              <p>包裹id:{{package.id}}</p>
+              <p class="text-secondary">包裹id:{{package.id}}</p>
             </div>
             <div class="col-md-3 text-md-left text-center align-self-center my-4">
-              <p>包裹状态:{{package.status}}</p>
+              <p class="text-secondary">包裹状态:{{package.status}}</p>
             </div>
             <div class="col-md-3 text-md-left text-center align-self-center my-4">
               <p>收件地址:{{package.address}}</p>
