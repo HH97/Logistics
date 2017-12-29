@@ -52,6 +52,11 @@ def signIn(request):
 						'statCode' : 1,
 						'username' : username
 					}))
+			elif count_type == 3:
+				return HttpResponse(json.dumps({
+						'statCode' : 2,
+						'username' : username
+					}))
 			else:
 				return HttpResponse(json.dumps({
 						'statCode' : 0,
@@ -147,24 +152,26 @@ def userPackage(request):
 		package_id = cursor.lastrowid
 		print('package_id %d',package_id)
 		cursor.execute('insert into Log_web_package_send\
-			(id,package_id_id,addr_pro,addr_city,addr_district,addr_block,tel)\
-			values(0,%s,%s,%s,%s,%s,%s)',[
+			(id,package_id_id,addr_pro,addr_city,addr_district,addr_block,tel,name)\
+			values(0,%s,%s,%s,%s,%s,%s,%s)',[
 				str(package_id),
 				mes['sendPro'],
 				mes['sendCity'],
 				mes['sendRegion'],
 				mes['sendStreet'],
-				mes['sendTel']
+				mes['sendTel'],
+				mes['sendName']
 			])
 		cursor.execute('insert into Log_web_package_receive\
-			(id,package_id_id,addr_pro,addr_city,addr_district,addr_block,tel)\
-	 		values(0,%s,%s,%s,%s,%s,%s)',[
+			(id,package_id_id,addr_pro,addr_city,addr_district,addr_block,tel,name)\
+	 		values(0,%s,%s,%s,%s,%s,%s,%s)',[
 				str(package_id),
 				mes['recPro'],
 				mes['recCity'],
 				mes['recRegion'],
 				mes['recStreet'],
-				mes['recTel']
+				mes['recTel'],
+				mes['recName']
 			])
 		#获取仓库所在地
 		cursor.execute('select godown_id from Log_web_godown \
@@ -354,7 +361,6 @@ def getWeight(request):
 				'statCode' : 0,
 			}))
 
-
 def getDistributor(request):
 	distributor_list = []
 	try:
@@ -441,3 +447,57 @@ def godownKeeperPackage(request):
 				'errormessage' : 'Backend processing Error!',
 			}))
 
+def distribute(request):
+	try:
+		res_mes = []
+		if request.session['username'] == '':
+			package = {}
+			package['id'] = '--'
+			package['name'] = '--'
+			package['tel'] = '--'
+			package['addr'] = '--'
+			res_mes.append(package)
+		else:
+			cursor = connection.cursor()
+			cursor.execute('select count_type from Log_web_login_user \
+				where username = %s',[request.session['username']])
+			user_type = cursor.fetchall()[0][0]
+			if not user_type == 3:
+				package = {}
+				package['id'] = '--'
+				package['name'] = '--'
+				package['tel'] = '--'
+				package['addr'] = '--'
+				res_mes.append(package)
+			else:
+				#首先获得godownid，再查包裹
+				flag = cursor.execute('select package_id_id \
+					from Log_web_package_info \
+					where godown_id_id in \
+					(select godown_id from Log_web_distributor \
+					where distributor_id=%s)',[request.session['username']])
+				if flag:
+					packages = cursor.fetchall()
+					for pack in packages:
+						pack_tmp = {}
+						pack_tmp['id'] = pack[0]
+						cursor.execute("select addr_pro,addr_city,\
+							addr_district,addr_block ,tel ,name\
+							from Log_web_package_receive\
+							where package_id_id = %s",pack[0])
+						addr = cursor.fetchall()
+						pack_tmp['addr'] = addr[0][0] + addr[0][1] + addr[0][2] +addr[0][3]
+						pack_tmp['tel'] = addr[0][4]
+						pack_tmp['name'] = addr[0][5]						
+						res_mes.append(pack_tmp)
+				else:
+					package = {}
+					package['id'] = '--'
+					package['name'] = '--'
+					package['tel'] = '--'
+					package['addr'] = '--'
+					res_mes.append(packages)
+		return render(request,"courier.html",{'packages':res_mes})
+	except Exception:
+		traceback.print_exc()
+		return render(request,"courier.html",{'packages':res_mes})

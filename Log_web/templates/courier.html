@@ -25,24 +25,23 @@ background-attachment:fixed;">
       <div class="row">
         <div class="col-md-12 opaque-overlay">
           <h1 class="text-secondary">我配送的包裹</h1>
-          <br> {% for package_id in package_id_list %}
+          <br> {% for package in packages %}
           <div class="input-group my-1">
             <div class="row">
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>包裹id:{{包裹id}}</p>
+                <p>包裹id:{{package.id}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p class="">收件人姓名:{{收件人姓名}}</p>
+                <p class="">收件人姓名:{{package.name}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>收件人联系方式:{{收件人联系方式}}</p>
+                <p>收件人电话:{{package.tel}}</p>
               </div>
               <div class="col-md-3 text-md-left text-center align-self-center my-4">
-                <p>收件人地址:{{收件人地址}}</p>
+                <p>收件人地址:{{package.addr}}</p>
               </div>
             </div>
           </div> {% endfor %}
-          <a class="btn btn-primary" href="/user">返回</a>
         </div>
       </div>
     </div>

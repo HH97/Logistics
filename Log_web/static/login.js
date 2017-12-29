@@ -39,12 +39,15 @@ function Func_signIn(){
 			"password":$("#password").val()
 		}
 	}).done(function(data){
+		alert(data.statCode)
 		if(data.statCode < 0){
 			alert(data.errormessage)
 		}else if(data.statCode == 0){
 			location.replace("/user/")
 		}else if(data.statCode == 1){
 			location.replace("/godown_keeper/")
+		}else if(data.statCode == 2){
+			location.replace("/distribute/")
 		}
 	})
 }

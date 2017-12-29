@@ -24,6 +24,7 @@ class Package_send(models.Model):
 		Package,
 		on_delete = models.CASCADE,
 	)
+	name = models.CharField(max_length=20)
 	addr_pro = models.CharField(max_length=20)
 	addr_city = models.CharField(max_length=20,blank=True)
 	addr_district = models.CharField(max_length=20)
@@ -36,6 +37,7 @@ class Package_receive(models.Model):
 		Package,
 		on_delete=models.CASCADE,
 	)
+	name = models.CharField(max_length=20)
 	addr_pro = models.CharField(max_length=20)
 	addr_city = models.CharField(max_length=20,blank=True)
 	addr_district = models.CharField(max_length=20)
