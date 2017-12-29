@@ -36,9 +36,12 @@ background-attachment:fixed;">
           <h1 class="text-light">公司管理</h1>
           <br>{% block mainbody0 %}
           <form class="form-inline justify-content-center">
-            <div class="input-group my-1">
-              <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="公司名称" id="inlineFormInputGroup">
-              <input type="text" class="form-control mr-3 my-1 opaque-overlay" placeholder="运费总额" id="inlineFormInputGroup"> </div>
+            <div class="col-md-3 text-md-left text-center align-self-center my-4">
+              <p class="text-white">公司名称:{{company_name}}</p>
+            </div>
+            <div class="col-md-3 text-md-left text-center align-self-center my-4">
+              <p class="text-white">资金:{{sum_money}}</p>
+            </div>
           </form> {% endblock %}
           <br>
           <a class="btn btn-primary" href="/user">返回</a>
