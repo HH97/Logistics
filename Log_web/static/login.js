@@ -39,7 +39,6 @@ function Func_signIn(){
 			"password":$("#password").val()
 		}
 	}).done(function(data){
-		alert(data.statCode)
 		if(data.statCode < 0){
 			alert(data.errormessage)
 		}else if(data.statCode == 0){
