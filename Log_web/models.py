@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 #登录用户信息表
 
+
 class Login_user(models.Model):
 	#attributes:
 	username = models.CharField(max_length=50,unique=True,primary_key=True)
@@ -84,11 +85,7 @@ class Package_info(models.Model):
 	)
 	weight = models.FloatField()
 	transport_form = models.CharField(max_length=10)
-	Distributor_id = models.ForeignKey(
-		Distributor,
-		on_delete = models.SET_NULL,
-		null = True
-	)
+	Distributor_id_id = models.CharField(max_length=20)
 	godown_id = models.ForeignKey(
 		Godown,
 		on_delete = models.SET_NULL,
@@ -112,5 +109,4 @@ class Godown_staff(models.Model):
 class Company(models.Model):
 	name = models.CharField(max_length=50)
 	sum_money = models.IntegerField()
-
-
+	
