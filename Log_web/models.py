@@ -85,7 +85,7 @@ class Package_info(models.Model):
 	)
 	weight = models.FloatField()
 	transport_form = models.CharField(max_length=10)
-	Distributor_id_id = models.CharField(max_length=20)
+	Distributor_id_id = models.CharField(max_length=20,null=True)
 	godown_id = models.ForeignKey(
 		Godown,
 		on_delete = models.SET_NULL,
@@ -109,4 +109,4 @@ class Godown_staff(models.Model):
 class Company(models.Model):
 	name = models.CharField(max_length=50)
 	sum_money = models.IntegerField()
-	
+

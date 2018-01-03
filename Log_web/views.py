@@ -180,7 +180,8 @@ def userPackage(request):
 		row = cursor.fetchall()
 		godown_id = row[0][0]
 		#将信息填入包裹信息表
-		cursor.execute('insert into Log_web_package_info \
+		cursor.execute('insert into Log_web_package_info\
+			(id,weight,transport_form,status,Distributor_id_id,godown_id_id,package_id_id) \
 			values(0,0.0,%s,%s,null,%s,%s)',[
 				mes['transType'],
 				'等待揽收',
@@ -366,7 +367,7 @@ def getDistributor(request):
 	try:
 		godown = request.GET['godown']
 		cursor = connection.cursor()
-		flag = cursor.execute('select staff_id from Log_web_godown_staff \
+		flag = cursor.execute('select distributor_id from Log_web_distributor \
 			where godown_id=%s',[godown])
 		if flag:
 			distributor_list = list(cursor.fetchall())
